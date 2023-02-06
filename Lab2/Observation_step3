@@ -1,0 +1,8 @@
+Lab 2 Observations
+
+Step 3:
+The program prints the statement "Before forking."
+It then proceeds to print in succession "Parent Process #" and "Child Process #"
+each with their own incrementing count up to 99. Sometimes either the Child process
+or the Parent process will print twice or more in succession. 
+
