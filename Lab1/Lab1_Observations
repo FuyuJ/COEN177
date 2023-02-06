@@ -1,0 +1,17 @@
+Observations for running 1.sh
+
+I start the program with command sh 1.sh
+The terminal lists the files found in the same file as my program.
+It then lists the HOME, USER, PATH of the program.
+The program prints "Please enter your name:"
+I enter the input "Marianne"
+The program greets me and allows me to proceed since the name matches the one in the program.
+The program also tells me how many users are logged on.
+The program then asks me to enter the height of a rectangle.
+I input the integer 2.
+The program then asks me to enter the width of a rectangle.
+I input the integer 4.
+The program then prints out the area of the rectangle which is 8.
+It then asks me if I want to repeat the program by giving me a Yes/No option.
+I input No.
+The program exits and the terminal shows me which folder I'm currently accessing. 
