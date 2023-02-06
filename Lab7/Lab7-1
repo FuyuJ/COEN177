@@ -1,0 +1,59 @@
+Name: Marianne Fuyu Yamazaki Dorr
+Date: Thursday 5PM-8PM
+Title: Minix Scheduling
+Description: Modify the Minix Scheduler to assign random priority to queues with priority > 2
+
+Lab7
+Steps for Changing Priority Queue in Minix 3
+
+1. Open up a terminal on a school linux machine
+2. Type the following command and press enter: setup vmware
+3. Type the following command and press enter: vmware &
+4. On the VM window (not terminal), open the minix 3 subfolder
+5. Launch minix3.vmx by double clicking it and press the Power On button
+6. When prompted for user name type: root
+7. Type your password and press enter (you will not be able to see your password being written)
+8. Type the following command in the VM and press enter: tcpd ftp /usr/bin/in.ftpd &
+9. Type the following command in the VM and press enter: ifconfig
+10. Make note of the given IP address and get out of the VM window by pressing Ctrl + Alt
+11. In the terminal, type: ftp 172.16.127.132 //this is the ip address I got, yours may be different, change accordingly
+12. Wait until prompted for username then enter your username: root
+13. When prompted for password type the password you set up in step 8
+14. At this point, go back to the VM and search for the Copyright statement via the following steps
+15. Type the following and press enter: cd /usr/src/
+16. Type the following and press enter: cd kernel
+17. Type the following and press enter: grep -l pick *
+18. This should return proc.c & proc.h
+19. Go back to terminal window. (to escape VM press Ctrl + Alt)
+20. Change your directory in your host machine to where you want proc.c to go to using lcd command (I had mine in /Documents/OS/Lab7)
+20-2. Example of command usage: lcd Documents
+				lcd OS
+				lcd Lab7
+21. Now change the directory of VM by typing the following: cd /usr/src/
+22. Type the following and press enter: cd kernel
+23. Type the following and press enter: get proc.c
+24. Once proc.c has been copied over from your VM to your host machine open another terminal
+25. In the new terminal access proc.c via an editor (first go to its location via cd)
+26. I used vim proc.c, press 'I' to go into insert mode
+27. Go to pick_proc function
+28. Add the following code at beginning of for loop *see attached png in submission:
+	if (q > 2) {
+		int probability;
+		probability = rand()%10;
+		if (probability <= 2) {
+			q = rand()% 13;
+			q+= 3;
+		}
+	}
+Whenever q is greater than 2, it will create a variable to hold a probability from 0 - 9, 30%
+of the time, this probability will fall between 0 and 2. If it does, q will take on a random
+value between 0 - 12, upon which 3 will be added to make it fall within 3 - 15, since we don't
+want q to take on values between 0 to 2. 
+29. Save the file by pressing Escape and typing :x
+30. Close that terminal and return to the first terminal
+31. Now type the following and press enter: put proc.c
+32. Go to the VM window 
+32-2. Type cd /usr/src/
+33. Type the following and press enter, this will take awhile: make world
+34. Once Minix is recompiled, type the following and press enter: reboot
+35. If you if takes a longer time, between 5 - 10 min to reboot, you have successfully changed the priority queue. 
