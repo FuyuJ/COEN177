@@ -1,0 +1,178 @@
+Lab5 Observations: 
+
+Step 1:
+
+buyingMilkSol1.c Observations:
+	In this program, both thread B and thread A end up buying milk since 
+	both threads can enter the critical section at the same time.
+	The program only keeps track of two booleans, one for note and one for
+	milk. Since there is a sleep(10); right after thread A checks if both 
+	note and milk are false, then a context switch is forced and thread B
+	also goes through the if statements into the critical section. As a result.
+	this method is not satisfactory and won't guarantee that only one thread
+	will purchase the milk.  
+
+buyingMilkSol2.c Observations:
+	In this program, neither thread A nor thread B buys the milk. Again, the 
+	program keeps track of the two booleans, note and milk, set to false. However,
+	thread A firsts assigns the note to true before the if statements. There is a 
+	sleep(10); called after checking if milk is false, which forces a context switch 
+	thread B which does the same thing, setting the note to true, then checking that 
+	milk is false. At this point, both threads are trying to check if the note is 
+	false, but since they both set it to true, neither can proceed. Thus, no thread
+	is able to buy milk. This method is also not satisfactory since the goal is for 
+	one thread to buy milk. 
+
+buyingMilkSol3.c Observations:
+	In this program, neither thread A nor thread B buys the milk. Instead of having 
+	one note, the program has a noteA and noteB and still has the boolean milk.
+	Initially, all booleans are set to false. When thread A is created, it sets the value
+	of noteA to true then invokes sleep(10); forcing a context switch to thread B. Similarly,
+	thread B sets the value of noteB to true, then checks if the value of noteA is false. 
+	Since threadA, already had set it to true, thread B cannot proceed. Once thread A 
+	continues execution, it also cannot proceed since noteB is true and not false. 
+	This method is not satisfactory since neither thread is able to proceed to buy the milk
+	if a context switch is made after both threads set their notes to true. 
+
+buyingMilkSol4.c Observations:
+	In this program, thread A successfully buys milk and thread B does not. Similarly to
+	solution 3, the program has three booleans: noteA, noteB, and milk, all initially
+	set to false. It then creates thread A which sets the value of noteA to true then
+	invokes sleep(10); forcing a context switch. Thread B sets the value of noteB to true
+	then checks if the value of noteA is false, since it is true, it skips over the if
+	block and sets noteB back to false. Thread A then proceeds past the while loop, getting 	
+	into the if block since the value of noteB is false, and buys milk. This program 
+	satisfies the condition of only one thread buying milk, however makes it that only thread
+	A will end up buying milk. 
+
+Step 2:
+
+Explain what happens when you run the threadSync.c program and how its different from threadHello.c:
+	In this program, each of the 10 threads enter the critical section one at a time and prints 
+	it out. Each thread also prints out a statement once it has returned. This program differs 
+	from threadHello.c because it locks out the threads from entering the critical section, whereas
+	in threadHello.c, all threads could execute concurrently. 
+
+Step 3:
+
+Output of lab5_step3.c
+Thread 0 Entered Critical Section..
+Thread 2 Entered Critical Section..
+			Thread 0 returned 
+Thread 1 Entered Critical Section..
+			Thread 1 returned 
+			Thread 2 returned 
+Thread 3 Entered Critical Section..
+			Thread 3 returned 
+Thread 4 Entered Critical Section..
+Thread 5 Entered Critical Section..
+			Thread 4 returned 
+Thread 6 Entered Critical Section..
+			Thread 5 returned 
+Thread 7 Entered Critical Section..
+			Thread 6 returned 
+Thread 8 Entered Critical Section..
+			Thread 7 returned 
+Thread 9 Entered Critical Section..
+			Thread 8 returned 
+			Thread 9 returned 
+Main thread done.
+
+Step 4:
+
+Output of lab5_step4.c until termination:
+Producer #: 1 produced item: 53 at buffer space: 1
+Producer #: 1 produced item: 53 at buffer space: 2
+Producer #: 1 produced item: 27 at buffer space: 3
+Producer #: 1 produced item: 7 at buffer space: 4
+Producer #: 1 produced item: 79 at buffer space: 5
+Producer #: 1 produced item: 15 at buffer space: 6
+Producer #: 1 produced item: 87 at buffer space: 7
+Producer #: 1 produced item: 21 at buffer space: 8
+			Consumer #: 0 consumed item: 53 at buffer space: 1
+			Consumer #: 0 consumed item: 53 at buffer space: 2
+			Consumer #: 0 consumed item: 27 at buffer space: 3
+			Consumer #: 0 consumed item: 7 at buffer space: 4
+			Consumer #: 0 consumed item: 79 at buffer space: 5
+			Consumer #: 0 consumed item: 15 at buffer space: 6
+			Consumer #: 0 consumed item: 87 at buffer space: 7
+Producer #: 2 produced item: 53 at buffer space: 9
+Producer #: 2 produced item: 20 at buffer space: 0
+Producer #: 2 produced item: 7 at buffer space: 1
+Producer #: 2 produced item: 65 at buffer space: 2
+Producer #: 2 produced item: 1 at buffer space: 3
+Producer #: 2 produced item: 54 at buffer space: 4
+Producer #: 2 produced item: 47 at buffer space: 5
+			Consumer #: 1 consumed item: 21 at buffer space: 8
+			Consumer #: 1 consumed item: 53 at buffer space: 9
+			Consumer #: 1 consumed item: 20 at buffer space: 0
+			Consumer #: 1 consumed item: 7 at buffer space: 1
+			Consumer #: 1 consumed item: 65 at buffer space: 2
+			Consumer #: 1 consumed item: 1 at buffer space: 3
+			Consumer #: 1 consumed item: 54 at buffer space: 4
+Producer #: 1 produced item: 45 at buffer space: 6
+Producer #: 1 produced item: 80 at buffer space: 7
+Producer #: 1 produced item: 5 at buffer space: 8
+Producer #: 1 produced item: 81 at buffer space: 9
+Producer #: 1 produced item: 8 at buffer space: 0
+Producer #: 1 produced item: 39 at buffer space: 1
+Producer #: 1 produced item: 15 at buffer space: 2
+			Consumer #: 0 consumed item: 47 at buffer space: 5
+			Consumer #: 0 consumed item: 45 at buffer space: 6
+			Consumer #: 0 consumed item: 80 at buffer space: 7
+			Consumer #: 0 consumed item: 5 at buffer space: 8
+			Consumer #: 0 consumed item: 81 at buffer space: 9
+			Consumer #: 0 consumed item: 8 at buffer space: 0
+			Consumer #: 0 consumed item: 39 at buffer space: 1
+Producer #: 2 produced item: 46 at buffer space: 3
+Producer #: 2 produced item: 1 at buffer space: 4
+^C
+ Terminating
+
+Step 5:
+
+Output of lab5_step5.c until termination:
+Producer #: 0 produced item: 23 at buffer space: 1
+Producer #: 1 produced item: 23 at buffer space: 2
+			Consumer #: 0 consumed item: 23 at buffer space: 1
+Producer #: 2 produced item: 23 at buffer space: 3
+			Consumer #: 1 consumed item: 23 at buffer space: 2
+Producer #: 1 produced item: 23 at buffer space: 4
+Producer #: 0 produced item: 14 at buffer space: 5
+Producer #: 2 produced item: 42 at buffer space: 6
+Producer #: 1 produced item: 20 at buffer space: 7
+Producer #: 0 produced item: 22 at buffer space: 8
+Producer #: 2 produced item: 94 at buffer space: 9
+Producer #: 1 produced item: 7 at buffer space: 0
+Producer #: 0 produced item: 42 at buffer space: 1
+Producer #: 2 produced item: 5 at buffer space: 2
+			Consumer #: 0 consumed item: 23 at buffer space: 3
+Producer #: 1 produced item: 4 at buffer space: 3
+			Consumer #: 1 consumed item: 23 at buffer space: 4
+Producer #: 2 produced item: 42 at buffer space: 4
+			Consumer #: 0 consumed item: 14 at buffer space: 5
+Producer #: 0 produced item: 77 at buffer space: 5
+			Consumer #: 1 consumed item: 42 at buffer space: 6
+Producer #: 1 produced item: 13 at buffer space: 6
+			Consumer #: 0 consumed item: 20 at buffer space: 7
+Producer #: 2 produced item: 57 at buffer space: 7
+			Consumer #: 1 consumed item: 22 at buffer space: 8
+Producer #: 0 produced item: 6 at buffer space: 8
+			Consumer #: 0 consumed item: 94 at buffer space: 9
+Producer #: 1 produced item: 70 at buffer space: 9
+			Consumer #: 1 consumed item: 7 at buffer space: 0
+Producer #: 2 produced item: 46 at buffer space: 0
+			Consumer #: 0 consumed item: 42 at buffer space: 1
+Producer #: 0 produced item: 25 at buffer space: 1
+			Consumer #: 1 consumed item: 5 at buffer space: 2
+Producer #: 1 produced item: 78 at buffer space: 2
+			Consumer #: 0 consumed item: 4 at buffer space: 3
+Producer #: 2 produced item: 55 at buffer space: 3
+			Consumer #: 1 consumed item: 42 at buffer space: 4
+Producer #: 0 produced item: 59 at buffer space: 4
+			Consumer #: 0 consumed item: 77 at buffer space: 5
+Producer #: 1 produced item: 24 at buffer space: 5
+			Consumer #: 1 consumed item: 13 at buffer space: 6
+Producer #: 2 produced item: 86 at buffer space: 6
+^C
+
