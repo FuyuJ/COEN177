@@ -1,0 +1,91 @@
+Step 1:
+The threadHello.c program creates 20 threads and prints out a statement accompanied by
+the thread ID. It will then wait for each thread to return and print it out before exiting 
+the program.
+
+Other than the thread IDs changing, you get the same result every time you run the program.
+It will print out the threads in the same order and return them in the same order as well.
+There is an error with how the i variable is being passed due to context switches, but in
+reality the threads are still being created and returned in the same order each time.
+
+The behavior does not change while running other demanding processes.
+
+The function(go) has the parameter arg passed as a local variable. This variable is 
+per-thread. It stores these variables' states in the stack since each thread has its own
+stack.
+
+The main() has local variable i, this variable is shared state since each thread will have a 
+copy of this variable in its stack and it is stored by the compiler in the program stack. 
+
+Step 2:
+When removing the second for loop, the program will only create the threads, printing out their
+thread ID. Once it is done creating the threads, it will print out "Main thread done". It no 
+longer prints out the return statements of each thread. Also since the pthread_join() function
+is no longer being called, there is the possibility of not all threads being able to print out 
+their statements before the main ends. 
+
+Step 3: 
+Output:
+Printing Matrix A: 4 rows and 4 columns
+
+1.000000 5.000000 1.000000 7.000000 
+0.000000 9.000000 2.000000 7.000000 
+8.000000 4.000000 9.000000 6.000000 
+4.000000 5.000000 7.000000 3.000000 
+
+Printing Matrix B: 4 rows and 4 columns
+
+1.000000 5.000000 1.000000 7.000000 
+0.000000 9.000000 2.000000 7.000000 
+8.000000 4.000000 9.000000 6.000000 
+4.000000 5.000000 7.000000 3.000000 
+
+Printing Matrix C: 4 rows and 4 columns
+
+37.000000 89.000000 69.000000 69.000000 
+44.000000 124.000000 85.000000 96.000000 
+104.000000 142.000000 139.000000 156.000000 
+72.000000 108.000000 98.000000 114.000000 
+
+Step 4:
+Output:
+Creating thread for row: 0 of matrixA and column: 0 of matrixB 
+Creating thread for row: 0 of matrixA and column: 1 of matrixB 
+Creating thread for row: 0 of matrixA and column: 2 of matrixB 
+Creating thread for row: 0 of matrixA and column: 3 of matrixB 
+Creating thread for row: 1 of matrixA and column: 0 of matrixB 
+Creating thread for row: 1 of matrixA and column: 1 of matrixB 
+Creating thread for row: 1 of matrixA and column: 2 of matrixB 
+Creating thread for row: 1 of matrixA and column: 3 of matrixB 
+Creating thread for row: 2 of matrixA and column: 0 of matrixB 
+Creating thread for row: 2 of matrixA and column: 1 of matrixB 
+Creating thread for row: 2 of matrixA and column: 2 of matrixB 
+Creating thread for row: 2 of matrixA and column: 3 of matrixB 
+Creating thread for row: 3 of matrixA and column: 0 of matrixB 
+Creating thread for row: 3 of matrixA and column: 1 of matrixB 
+Creating thread for row: 3 of matrixA and column: 2 of matrixB 
+Creating thread for row: 3 of matrixA and column: 3 of matrixB 
+Printing Matrix A:
+
+6.000000 3.000000 6.000000 5.000000 
+6.000000 8.000000 6.000000 8.000000 
+4.000000 7.000000 1.000000 8.000000 
+8.000000 0.000000 7.000000 8.000000 
+
+Printing Matrix B:
+
+6.000000 3.000000 6.000000 5.000000 
+6.000000 8.000000 6.000000 8.000000 
+4.000000 7.000000 1.000000 8.000000 
+8.000000 0.000000 7.000000 8.000000 
+
+Printing Matrix C:
+
+118.000000 84.000000 95.000000 142.000000 
+172.000000 124.000000 146.000000 206.000000 
+134.000000 75.000000 123.000000 148.000000 
+140.000000 73.000000 111.000000 160.000000 
+
+
+
+
