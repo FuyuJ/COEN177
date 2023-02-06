@@ -1,0 +1,52 @@
+Name: Marianne Fuyu Yamazaki Dorr
+Date: Thursday 5PM-8PM
+Title: Minix Operating System
+Description: Installing, running, and rebuilding Minix via a Virtual Machine. 
+
+Lab6
+Steps for Setting up a Minix VM and editing the kernel
+
+1. Open up a terminal on school linux machine
+2. Type the following command and press enter: setup vmware
+3. Type the following command and press enter: minix-get-image
+4. Type the following command and press enter: vmware &
+5. On the VM window (not terminal), open the minix 3 subfolder
+6. Launch minix3.vmx by double clicking it and press the Power On button
+7. When prompted for user name type: root
+8. Setup a password by typing the following and pressing enter: passwd
+9. Type your password and press enter (you will not be able to see your password being written)
+10. Retype the same password and press enter when prompted again
+11. Type the following command in the VM and press enter: tcpd ftp /usr/bin/in.ftpd &
+12. Type the following command in the VM and press enter: ifconfig
+13. Make note of the given IP address and get out of the VM window by pressing Ctrl + Alt
+14. In the terminal, type: ftp 172.16.127.132 //this is the ip address I got, yours may be different, change accordingly
+15. Wait until prompted for username then enter your username: root
+16. When prompted for password type the password you set up in step 8
+17. At this point, go back to the VM and search for the Copyright statement via the following steps
+18. Type the following and press enter: cd /usr/src/
+19. Type the following and press enter: cd kernel
+20. Type the following and press enter: grep -l Copyright *
+21. This should return main.c
+22. Go back to terminal window. (to escape VM press Ctrl + Alt)
+23. Change your directory in your host machine to where you want main.c to go to using lcd command (I had mine in /Documents/OS/Lab6)
+23-2. Example of command usage: cd Documents
+				cd OS
+				cd Lab6
+24. Now change the directory of VM by typing the following: cd /usr/src/
+25. Type the following and press enter: cd kernel
+26. Type the following and press enter: get main.c
+27. Once main.c has been copied over from your VM to your host machine open another terminal
+28. In the new terminal access main.c via an editor (first go to its location via cd)
+29. I used vim main.c, press 'I' to go into insert mode
+30. Find the Copyright statement and change it (I added "Marianne was here!" in front of it)
+31. Save the file by pressing Escape and typing :x
+32. Close that terminal and return to the first terminal
+33. Now type the following and press enter: put main.c
+34. Go to the VM window 
+35. Type the following and press enter, this will take awhile: make world
+36. Once Minix is recompiled, type the following and press enter: reboot
+37. If you see the change you made, you succeeded! Take a screenshot.
+
+
+
+
