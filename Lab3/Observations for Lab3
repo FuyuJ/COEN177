@@ -1,0 +1,54 @@
+Observations for Lab3:
+
+Step 1 Output:
+[myamazakidorr@linux11117 Lab3]$ ./a.out
+a.out
+lab3_1.c
+lab3_2.c
+Lab3_3.c
+lab3_ex.c
+lab3_step3.c
+lab3_step4.c
+lab3_step5.c
+Observations for Lab3
+pipes.c
+
+Step 2 Output: [myamazakidorr@linux11117 Lab3]$ ./a.out
+
+Reader on the downstream end of the pipe 
+Writer on the upstream end of the pipe -> 1 arguments 
+. / a . o u t 
+
+Step 3 Output:
+
+[myamazakidorr@linux11117 Lab3]$ ./a.out
+
+Writer on the upstream end of the pipe -> 1 arguments 
+
+Reader on the downstream end of the pipe 
+a . o u t 
+ l a b 3 _ 1 . c 
+ l a b 3 _ 2 . c 
+ L a b 3 _ 3 . c 
+ l a b 3 _ e x . c 
+ l a b 3 _ s t e p 3 . c 
+ l a b 3 
+_ s t e p 4 . c 
+ l a b 3 _ s t e p 5 . c 
+ O b s e r v a t i o n s   f o r   L a b 3 
+ p i p e s . c 
+ 
+Step 4 Output:
+[myamazakidorr@linux11117 Lab3]$ ./a.out
+root:x:0:0:root:/root:/bin/bash
+rootbash:x:0:0:root:/root:/bin/bash
+operator:x:11:0:operator:/root:/sbin/nologin
+
+Step 5 Output:
+[myamazakidorr@linux11117 Lab3]$ ./a.out
+Producer: Please input a sentence (at most 20 characters)
+Hello world!
+
+Consumer: Hello world!
+
+
